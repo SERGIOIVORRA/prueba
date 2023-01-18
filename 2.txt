@@ -1,0 +1,217 @@
+// ------------------ EJERCICIO 1 ---------------------------------------------------
+
+using System;
+
+namespace prueba1
+{
+	public class Program
+	{
+		static void Main(String[] args)
+		{
+
+			int n=0,cont=0;
+
+			Console.Write("Introduzca valor N para las máximas dimensiones de la tabla: ");
+			n=Convert.ToInt32(Console.ReadLine());
+
+			int[,] tabla = new int[n,n];
+
+			for(int i=0;i<n;i++)//Desplazamiento filas en tabla
+			{
+
+				for(int z=0;z<n;z++) // Desplazamiento columnas en tabla
+				{
+					tabla[i,z]=z+cont;
+					Console.Write("{0} ",(z+cont));
+				}
+				Console.WriteLine();
+				cont++; //Ajuste de cambio de fila
+			}
+		}
+	}
+}
+
+// ------------------ EJERCICIO 2 ---------------------------------------------------
+
+using System;
+
+namespace prueba1
+{
+	public class Program
+	{
+		static void Main(String[] args)
+		{
+
+			int num=0;
+			bool uno=false, primo=true;
+
+			Console.Write("Introduzca un número entre 1 y 9999: ");
+			num=Convert.ToInt32(Console.ReadLine());
+
+			if ((num>=1)&&(num<=9999)) // Comprobación valor es válido
+			{		
+				for(int i=2;i<num;i++)
+				{
+					if((num%i)==0) // Comprobación valor es primo
+					{
+						primo=false; // El valor no es primo al ser divisible de un valor entre 2 y el número-1
+
+						if(uno==false)
+						{
+						Console.WriteLine("El número {0} es múltiplo de 1",num);
+						uno=true;
+						}
+						
+						Console.WriteLine("También es es múltiplo de {0}",i);			
+					}
+				}
+
+				if(primo==false) // Número NO primo
+				{
+					Console.WriteLine("También es es múltiplo de {0}",num);
+				}
+				else 
+				{
+					Console.WriteLine("El número es primo");
+				}
+			}	
+
+			else // Valor introducido no es un número entre 1 y 9999
+			{
+				Console.WriteLine("Número incorrecto");
+			}
+		}
+	}
+}
+
+
+
+// ------------------ EJERCICIO 3 ---------------------------------------------------
+
+using System;
+
+namespace prueba1
+{
+	public class Program
+	{
+
+		struct Mecano
+		{
+			public int id;
+			public string titulo;
+			public string artista;
+			public int duracion;
+		}
+
+		struct Queen
+		{
+			public int id;
+			public string titulo;
+			public string artista;
+			public int duracion;
+		}
+
+
+		static void Main(String[] args)
+		{
+			Mecano[] canciones = new Mecano[4];
+			Queen[] canciones2 = new Queen[4];
+			int mayor=0, num_cancion=0, menor=0, durac1=0, durac2=0;
+
+// ------------ INTRODUCCIÓN DE DATOS -----------
+
+			canciones[0].id=1;
+			canciones[0].titulo="Bohemian";
+			canciones[0].artista="Queen";
+			canciones[0].duracion=300;
+
+			canciones[1].id=2;
+			canciones[1].titulo="Another";
+			canciones[1].artista="Queen";
+			canciones[1].duracion=180;
+
+			canciones[2].id=3;
+			canciones[2].titulo="Somebody";
+			canciones[2].artista="Queen";
+			canciones[2].duracion=240;
+
+			canciones[3].id=4;
+			canciones[3].titulo="Killer";
+			canciones[3].artista="Queen";
+			canciones[3].duracion=250;
+
+			canciones2[0].id=1;
+			canciones2[0].titulo="Cruz";
+			canciones2[0].artista="Mecano";
+			canciones2[0].duracion=500;
+
+			canciones2[1].id=2;
+			canciones2[1].titulo="Mujer";
+			canciones2[1].artista="Mecano";
+			canciones2[1].duracion=150;
+
+			canciones2[2].id=3;
+			canciones2[2].titulo="Hawai";
+			canciones2[2].artista="Mecano";
+			canciones2[2].duracion=120;
+
+			canciones2[3].id=4;
+			canciones2[3].titulo="Otro anyo más";
+			canciones2[3].artista="Mecano";
+			canciones2[3].duracion=180;
+
+// ------- CÁLCULO CANCIÓN MÁS LARGA QUEEN -----------------
+
+			mayor=canciones[0].duracion;
+
+			for(int i=1;i<4;i++)
+			{
+				if(canciones[i].duracion > mayor)
+				{
+					mayor = canciones[i].duracion;
+					num_cancion = i;
+				}
+			}
+
+			Console.WriteLine("La canción más larga de Queen es:");
+			Console.WriteLine("ID: {0}, Título: {1}, Duración: {2}",canciones[num_cancion].id,canciones[num_cancion].titulo,canciones[num_cancion].duracion);
+
+// ------- CÁLCULO CANCIÓN MÁS CORTA MECANO -----------------
+
+			menor=canciones2[0].duracion;
+
+			for(int z=1;z<4;z++)
+			{
+				if(canciones2[z].duracion < menor)
+				{
+					menor = canciones2[z].duracion;
+					num_cancion = z;
+				}
+			}
+
+			Console.WriteLine("\nLa canción más corta de Mecano es:");
+			Console.WriteLine("ID: {0}, Título: {1}, Duración: {2}",canciones2[num_cancion].id,canciones2[num_cancion].titulo,canciones2[num_cancion].duracion);
+		
+// ------- CÁLCULO ALBÚM MÁS LARGO -----------------
+
+			for(int y=0;y<4;y++)
+			{
+				durac1 = durac1 + canciones[y].duracion;
+			}
+
+			for(int x=0;x<4;x++)
+			{
+				durac2 = durac2 + canciones2[x].duracion;
+			}
+
+			if(durac1>durac2)
+			{
+				Console.Write("\nEl albúm más largo es el de Queen con una duración de {0}",durac1);
+			}
+			else
+			{
+				Console.Write("\nEl albúm más largo es el de Mecano con una duración de {0}",durac2);
+			}
+		}
+	}
+}
